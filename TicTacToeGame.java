@@ -1,8 +1,10 @@
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToeGame {
 	public static Scanner userInputScanner = new Scanner(System.in);
+	public static int USER = 1, COMPUTER = 1;
 
 	// Initializing TicTacToeBoard
 	public static char[] ticTacToeBoard() {
@@ -50,8 +52,7 @@ public class TicTacToeGame {
 			if (Arrays.asList(validCellsIntegers).contains(index) && moveAvailabile(board, index)) {
 				userInputScanner.close();
 				return index;
-			}
-			else {
+			} else {
 				System.out.println("Move not Available");
 			}
 		}
@@ -62,25 +63,38 @@ public class TicTacToeGame {
 		return board[index] == ' ';
 	}
 
-//Making move
+//	Making move
 	public static void makeMove(char[] board, int index, char letter) {
 		boolean isFree = moveAvailabile(board, index);
 		if (isFree) {
 			System.out.println("Move Successfull");
 			board[index] = letter;
-		}
-		else {
+		} else {
 			System.out.println("Move Unsuccessfull, Try Again");
 		}
 	}
 
-// Main Method
+//	Who shall play First
+	public static int playFirstToss() {
+		Random random = new Random();
+		int whoPlaysFirst = random.nextInt(2);
+		return whoPlaysFirst;
+	}
+
+//  Main Method
 	public static void main(String[] args) {
-		char[] ticTacToeBoardMain = ticTacToeBoard();
+		int whoPlaysFirst = playFirstToss();
+		String firstPlayerString = "";
+		if (whoPlaysFirst == 0)
+			firstPlayerString += "COMPUTER";
+		else
+			firstPlayerString += "USER";
+		System.out.println(firstPlayerString + " shall be playing first");
+		char[] ticTacToeBoardGame = ticTacToeBoard();
 		char userGameCharacter = chooseGameCharacter();
-		displayBoard(ticTacToeBoardMain);
-		int useMove = userMove(ticTacToeBoardMain);
-		makeMove(ticTacToeBoardMain, useMove, userGameCharacter);
-		displayBoard(ticTacToeBoardMain);
+		displayBoard(ticTacToeBoardGame);
+		int useMove = userMove(ticTacToeBoardGame);
+		makeMove(ticTacToeBoardGame, useMove, userGameCharacter);
+		displayBoard(ticTacToeBoardGame);
 	}
 }
