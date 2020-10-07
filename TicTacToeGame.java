@@ -51,7 +51,9 @@ public class TicTacToeGame {
 				userInputScanner.close();
 				return index;
 			}
-
+			else {
+				System.out.println("Move not Available");
+			}
 		}
 	}
 
@@ -60,12 +62,25 @@ public class TicTacToeGame {
 		return board[index] == ' ';
 	}
 
-	// Main Method
+//Making move
+	public static void makeMove(char[] board, int index, char letter) {
+		boolean isFree = moveAvailabile(board, index);
+		if (isFree) {
+			System.out.println("Move Successfull");
+			board[index] = letter;
+		}
+		else {
+			System.out.println("Move Unsuccessfull, Try Again");
+		}
+	}
+
+// Main Method
 	public static void main(String[] args) {
 		char[] ticTacToeBoardMain = ticTacToeBoard();
 		char userGameCharacter = chooseGameCharacter();
 		displayBoard(ticTacToeBoardMain);
 		int useMove = userMove(ticTacToeBoardMain);
-		System.out.println(useMove);
+		makeMove(ticTacToeBoardMain, useMove, userGameCharacter);
+		displayBoard(ticTacToeBoardMain);
 	}
 }
