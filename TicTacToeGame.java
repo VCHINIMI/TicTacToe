@@ -8,8 +8,7 @@ public class TicTacToeGame {
 		return ticTacToeBoard;
 	}
 	public static void main(String[] args) {
-		TicTacToeGame ticTacToeGame = new TicTacToeGame();
-		char[] ticTacToeBoardMain = ticTacToeBoard();		
+		char[] ticTacToeBoardMain = ticTacToeBoard();
+		System.out.println(ticTacToeBoardMain);
 	}
-
 }
