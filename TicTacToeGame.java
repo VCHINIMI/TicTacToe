@@ -103,9 +103,17 @@ public class TicTacToeGame {
 		return 0;
 	}
 
-// Get Computer's Move, if winning, return winning move. Else, return 0
-	public static int getComputerMove(char[] board, char computerLetter) {
-		return (getComputerMove(board, computerLetter));
+// Get Computer's Move, if winning, return winning move. Else, return 0. Also, if user is winning on next move, We try to block next move.
+	public static int getComputerMove(char[] board, char computerLetter, char userLetter) {
+		int winningMove = ifAnyWinningMove(computerLetter, board);
+		if (winningMove != 0)
+			return winningMove;
+		else {
+			int userWinningMove = ifAnyWinningMove(userLetter, board);
+			if (userLetter != 0)
+				return userWinningMove;
+		}
+		return 0;
 	}
 
 //  Main Method
