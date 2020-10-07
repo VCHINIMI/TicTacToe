@@ -1,8 +1,12 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TicTacToeGame {
+	public static Scanner userInputScanner = new Scanner(System.in);
+
 	// Initializing TicTacToeBoard
 	public static char[] ticTacToeBoard() {
+
 		char[] ticTacToeBoard = new char[10];
 		for (int i = 0; i < ticTacToeBoard.length; i++) {
 			ticTacToeBoard[i] = ' ';
@@ -14,25 +18,46 @@ public class TicTacToeGame {
 	public static char chooseGameCharacter() {
 		int flag = 0;
 		char userCharacter = ' ';
-		Scanner scanner = new Scanner(System.in);
 		while (flag == 0) {
 			System.out.println("Choose Game Character X or O");
-			userCharacter = scanner.next().charAt(0);
+			userCharacter = userInputScanner.next().charAt(0);
 			if (!(userCharacter == 'X' || userCharacter == 'O'))
 				System.out.println("Invalid Character");
 			else
 				flag = 1;
 		}
-		scanner.close();
 		return userCharacter;
 	}
 
 	// Displaying Board
-	public static void displayBoard(char[] board) {
+	public static void displayBoard(char[] gameBoard) {
 		System.out.println("\n");
-		System.out.println(board[1] + "|" + board[2] + "|" + board[2]);
-		System.out.println(board[4] + "|" + board[5] + "|" + board[6]);
-		System.out.println(board[7] + "|" + board[8] + "|" + board[9]);
+		System.out.println(gameBoard[1] + "|" + gameBoard[2] + "|" + gameBoard[2]);
+		System.out.println("-----");
+		System.out.println(gameBoard[4] + "|" + gameBoard[5] + "|" + gameBoard[6]);
+		System.out.println("-----");
+		System.out.println(gameBoard[7] + "|" + gameBoard[8] + "|" + gameBoard[9]);
+	}
+
+	// Getting User move
+	private static int userMove(char[] board) {
+		Integer[] validCellsIntegers = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+		while (true) {
+			System.out.println("What is next Move?");
+			int index = userInputScanner.nextInt();
+			userInputScanner.nextLine();
+			if (Arrays.asList(validCellsIntegers).contains(index) && moveAvailabile(board, index)) {
+				userInputScanner.close();
+				return index;
+			}
+
+		}
+	}
+
+// Checking if move is available or not
+	public static boolean moveAvailabile(char[] board, int index) {
+		return board[index] == ' ';
 	}
 
 	// Main Method
@@ -40,5 +65,7 @@ public class TicTacToeGame {
 		char[] ticTacToeBoardMain = ticTacToeBoard();
 		char userGameCharacter = chooseGameCharacter();
 		displayBoard(ticTacToeBoardMain);
+		int useMove = userMove(ticTacToeBoardMain);
+		System.out.println(useMove);
 	}
 }
