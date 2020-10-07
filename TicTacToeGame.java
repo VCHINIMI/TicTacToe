@@ -11,7 +11,7 @@ public class TicTacToeGame {
 
 		char[] ticTacToeBoard = new char[10];
 		for (int i = 0; i < ticTacToeBoard.length; i++) {
-			ticTacToeBoard[i] = 'X';
+			ticTacToeBoard[i] = ' ';
 		}
 		return ticTacToeBoard;
 	}
@@ -92,6 +92,21 @@ public class TicTacToeGame {
 				|| board[1] == userCharacter && board[5] == userCharacter && board[9] == userCharacter
 				|| board[3] == userCharacter && board[5] == userCharacter && board[7] == userCharacter);
 	}
+	
+// Computer's move-> Trying to win	
+	public static int ifAnyWinningMove(char letter, char[] board) {
+		for(int index = 1; index<=9;index++) {
+			char[] boardClone = board.clone();
+			if(isWinner(boardClone, letter))
+				return index;			
+		}
+		return 0;
+	}
+	
+// Get Computer's Move, if winning, return winning move. Else, return 0
+	public static int getComputerMove(char[] board, char computerLetter) {
+		return(getComputerMove(board, computerLetter));
+	}
 
 //  Main Method
 	public static void main(String[] args) {
@@ -104,8 +119,13 @@ public class TicTacToeGame {
 		System.out.println(firstPlayerString + " shall be playing first");
 		char[] ticTacToeBoardGame = ticTacToeBoard();
 		char userGameCharacter = chooseGameCharacter();
+		char computerGameCharacter=' ';
+		if(userGameCharacter=='X')
+			computerGameCharacter='O';
+		else 
+			computerGameCharacter='X';
+		
 		displayBoard(ticTacToeBoardGame);
-		System.out.println("Did user win :"+isWinner(ticTacToeBoardGame, userGameCharacter));
 		int userMove = userMove(ticTacToeBoardGame);
 		makeMove(ticTacToeBoardGame, userMove, userGameCharacter);
 		displayBoard(ticTacToeBoardGame);
