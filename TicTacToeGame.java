@@ -1,10 +1,12 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class TicTacToeGame {
 	public static Scanner userInputScanner = new Scanner(System.in);
-	public static int USER = 1, COMPUTER = 1;
+	public static int USER = 1, COMPUTER = 0;
 
 	// Initializing TicTacToeBoard
 	public static char[] ticTacToeBoard() {
@@ -111,16 +113,14 @@ public class TicTacToeGame {
 		int userWinningMove = ifAnyWinningMove(userLetter, board);
 		if (userLetter != 0)
 			return userWinningMove;
-		if (moveAvailabile(board, 1))
-			return 1;
-		if (moveAvailabile(board, 3))
-			return 3;
-		if (moveAvailabile(board, 7))
-			return 7;
-		if (moveAvailabile(board, 9))
-			return 9;
+		int[] movesArray = { 1, 3, 7, 9, 5, 2, 4, 6, 8 };// Order of corners, centre, sides
+		for (int movesIndex : movesArray) {
+			if (moveAvailabile(board, movesIndex))
+				return movesIndex;
+		}
 		return 0;
 	}
+	
 
 //  Main Method
 	public static void main(String[] args) {
