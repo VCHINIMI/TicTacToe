@@ -11,7 +11,7 @@ public class TicTacToeGame {
 
 		char[] ticTacToeBoard = new char[10];
 		for (int i = 0; i < ticTacToeBoard.length; i++) {
-			ticTacToeBoard[i] = ' ';
+			ticTacToeBoard[i] = 'X';
 		}
 		return ticTacToeBoard;
 	}
@@ -81,6 +81,18 @@ public class TicTacToeGame {
 		return whoPlaysFirst;
 	}
 
+//	check at anypoint if game has ended in win or tie 
+	public static boolean isWinner(char[] board, char userCharacter) {
+		return (board[1] == userCharacter && board[2] == userCharacter && board[3] == userCharacter
+				|| board[4] == userCharacter && board[5] == userCharacter && board[6] == userCharacter
+				|| board[7] == userCharacter && board[8] == userCharacter && board[9] == userCharacter
+				|| board[1] == userCharacter && board[4] == userCharacter && board[7] == userCharacter
+				|| board[2] == userCharacter && board[5] == userCharacter && board[8] == userCharacter
+				|| board[3] == userCharacter && board[6] == userCharacter && board[9] == userCharacter
+				|| board[1] == userCharacter && board[5] == userCharacter && board[9] == userCharacter
+				|| board[3] == userCharacter && board[5] == userCharacter && board[7] == userCharacter);
+	}
+
 //  Main Method
 	public static void main(String[] args) {
 		int whoPlaysFirst = playFirstToss();
@@ -93,8 +105,9 @@ public class TicTacToeGame {
 		char[] ticTacToeBoardGame = ticTacToeBoard();
 		char userGameCharacter = chooseGameCharacter();
 		displayBoard(ticTacToeBoardGame);
-		int useMove = userMove(ticTacToeBoardGame);
-		makeMove(ticTacToeBoardGame, useMove, userGameCharacter);
+		System.out.println("Did user win :"+isWinner(ticTacToeBoardGame, userGameCharacter));
+		int userMove = userMove(ticTacToeBoardGame);
+		makeMove(ticTacToeBoardGame, userMove, userGameCharacter);
 		displayBoard(ticTacToeBoardGame);
 	}
 }
