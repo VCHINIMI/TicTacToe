@@ -108,11 +108,17 @@ public class TicTacToeGame {
 		int winningMove = ifAnyWinningMove(computerLetter, board);
 		if (winningMove != 0)
 			return winningMove;
-		else {
-			int userWinningMove = ifAnyWinningMove(userLetter, board);
-			if (userLetter != 0)
-				return userWinningMove;
-		}
+		int userWinningMove = ifAnyWinningMove(userLetter, board);
+		if (userLetter != 0)
+			return userWinningMove;
+		if (moveAvailabile(board, 1))
+			return 1;
+		if (moveAvailabile(board, 3))
+			return 3;
+		if (moveAvailabile(board, 7))
+			return 7;
+		if (moveAvailabile(board, 9))
+			return 9;
 		return 0;
 	}
 
